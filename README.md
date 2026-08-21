@@ -3,12 +3,12 @@
 > A full-stack NLP application that analyzes product reviews and predicts whether a review is **genuine or fake** using machine learning.
 
 <p align="center">
-  <img src="assets/fake-review-home.png" alt="Fake Review Detection System" width="850">
+  <img src="fake-review-home.png" alt="Fake Review Detection System" width="850">
 </p>
 
 ---
 
-## 📌 Overview
+##  Overview
 
 The **Fake Review Detection System** is a machine learning-powered web application designed to identify potentially deceptive product reviews.
 
@@ -32,22 +32,6 @@ A **FastAPI REST API** provides real-time predictions and model performance metr
 
 ---
 
-## 📸 Project Preview
-
-### Review Detection
-
-<p align="center">
-  <img src="assets/prediction-result.png" alt="Fake Review Prediction" width="800">
-</p>
-
-Users can paste a product review into the interface and receive a prediction indicating whether the review is likely genuine or fake.
-
-### Model Metrics
-
-<p align="center">
-  <img src="assets/metrics.png" alt="Model Metrics" width="800">
-</p>
-
 The application also exposes model evaluation metrics including:
 
 * Accuracy
@@ -57,7 +41,7 @@ The application also exposes model evaluation metrics including:
 
 ---
 
-## 🧠 Machine Learning Pipeline
+## Machine Learning Pipeline
 
 ```text
 Product Review
@@ -99,7 +83,7 @@ The dataset is divided using an **80/20 train-test split** with stratification.
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 | Area             | Technologies            |
 | ---------------- | ----------------------- |
@@ -115,7 +99,7 @@ The dataset is divided using an **80/20 train-test split** with stratification.
 
 ---
 
-## 🏗️ System Architecture
+## System Architecture
 
 ```text
 ┌──────────────────────────┐
@@ -148,7 +132,7 @@ The dataset is divided using an **80/20 train-test split** with stratification.
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 ```text
 Fake-Review-Detection-System/
@@ -172,11 +156,8 @@ Fake-Review-Detection-System/
 ├── nginx/
 │   ├── default.conf
 │   └── Dockerfile
-│
-├── assets/
-│   ├── fake-review-home.png
-│   ├── prediction-result.png
-│   └── metrics.png
+│   
+│ 
 │
 ├── docker-compose.yml
 └── README.md
@@ -184,7 +165,7 @@ Fake-Review-Detection-System/
 
 ---
 
-## 🔌 API Endpoints
+## API Endpoints
 
 ### Health Check
 
@@ -338,7 +319,7 @@ Labels must be binary:
 
 ---
 
-## 💡 What I Learned
+## What I Learned
 
 Through this project, I gained hands-on experience with:
 
