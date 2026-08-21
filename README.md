@@ -165,74 +165,11 @@ Fake-Review-Detection-System/
 
 ---
 
-## API Endpoints
 
-### Health Check
-
-```http
-GET /healthz
-```
-
-Example response:
-
-```json
-{
-  "ok": true
-}
-```
-
-### Predict Review
-
-```http
-POST /predict
-```
-
-Request:
-
-```json
-{
-  "text": "This product is absolutely amazing!"
-}
-```
-
-Example response:
-
-```json
-{
-  "ok": true,
-  "result": {
-    "label": 1,
-    "confidence": 0.87
-  }
-}
-```
-
-### Model Metrics
-
-```http
-GET /metrics
-```
-
-Returns:
-
-```text
-Accuracy
-Precision
-Recall
-F1 Score
-```
-
-### Reload / Retrain Model
-
-```http
-POST /reload
-```
-
-The endpoint can load another CSV dataset and retrain the model.
 
 ---
 
-## 🚀 Running the Project
+## Running the Project
 
 ### Backend
 
