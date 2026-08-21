@@ -1,35 +1,328 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Fake Review Detector</title>
-  <link rel="stylesheet" href="./style.css" />
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Fake Review Detector
+    </title>
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
 </head>
+
+
 <body>
-  <div class="wrap">
-    <header>
-      <h1>Fake Review Detector</h1>
-      <p>Paste a product review, then click Predict. You can also view backend metrics.</p>
-    </header>
 
-    <main>
-      <textarea id="review" placeholder="Paste the review text here..."></textarea>
-      <div class="actions">
-        <button id="predictBtn">Predict</button>
-        <button id="metricsBtn">Show Metrics</button>
-        <span id="status"></span>
-      </div>
-      <div id="result" class="result"></div>
-      <h3>Model Metrics</h3>
-      <div id="metrics" class="result"></div>
-    </main>
+    <div class="page-container">
 
-    <footer>
-      <small>Backend: FastAPI · Frontend: Vanilla JS · No custom classes · Docker-ready</small>
-    </footer>
-  </div>
 
-  <script src="./script.js"></script>
+        <!-- =========================
+             HEADER
+        ========================== -->
+
+        <header class="navbar">
+
+            <div class="brand">
+
+                <div class="brand-logo">
+                    FR
+                </div>
+
+                <div class="brand-text">
+
+                    <h2>
+                        ReviewGuard AI
+                    </h2>
+
+                    <p>
+                        Fake Review Detection
+                    </p>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =========================
+             HERO SECTION
+        ========================== -->
+
+        <main>
+
+            <section class="hero">
+
+                <h1>
+
+                    Detect suspicious reviews
+
+                    <span>
+                        with machine learning.
+                    </span>
+
+                </h1>
+
+
+                <p class="hero-description">
+
+                    Analyze product-review text in real time
+                    and estimate whether a review is genuine
+                    or potentially deceptive.
+
+                </p>
+
+            </section>
+
+
+
+            <!-- =========================
+                 ANALYSIS AREA
+            ========================== -->
+
+            <section class="workspace">
+
+
+                <!-- LEFT CARD -->
+
+                <div class="analysis-card">
+
+                    <div class="card-title">
+
+                        <div class="step-number">
+                            01
+                        </div>
+
+                        <div>
+
+                            <h2>
+                                Analyze a Review
+                            </h2>
+
+                            <p>
+                                Paste a product review below
+                                to classify it.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- Example Reviews -->
+
+                    <div class="examples">
+
+                        <span>
+                            Try an example:
+                        </span>
+
+                        <button
+                            class="example-btn"
+                            data-example="real"
+                        >
+                            Genuine-style review
+                        </button>
+
+
+                        <button
+                            class="example-btn"
+                            data-example="fake"
+                        >
+                            Suspicious-style review
+                        </button>
+
+                    </div>
+
+
+
+                    <!-- Review Input -->
+
+                    <div class="textarea-container">
+
+                        <textarea
+                            id="review"
+                            maxlength="3000"
+                            placeholder="Example: I bought this headset two weeks ago. The battery lasts around six hours and the microphone is clear, although the ear cushions feel slightly warm after long use..."
+                        ></textarea>
+
+
+                        <div class="textarea-footer">
+
+                            <span id="charCount">
+                                0 / 3000
+                            </span>
+
+
+                            <button
+                                id="clearBtn"
+                                class="clear-btn"
+                            >
+                                Clear
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- Analyze Button -->
+
+                    <button
+                        id="predictBtn"
+                        class="analyze-btn"
+                    >
+
+                        <span class="button-text">
+                            Analyze Review
+                        </span>
+
+                        <span class="arrow">
+                            →
+                        </span>
+
+                    </button>
+
+
+                    <p
+                        id="status"
+                        class="status-message"
+                    ></p>
+
+
+                </div>
+
+
+
+                <!-- RIGHT CARD -->
+
+                <div class="result-card">
+
+                    <div class="card-title">
+
+                        <div class="step-number">
+                            02
+                        </div>
+
+                        <div>
+
+                            <h2>
+                                Prediction
+                            </h2>
+
+                            <p>
+                                Model classification
+                                and confidence.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div
+                        id="result"
+                        class="prediction-empty"
+                    >
+
+
+                        <div class="ai-animation">
+
+                            <div class="outer-ring"></div>
+
+                            <div class="inner-ring"></div>
+
+
+                            <div class="ai-box">
+                                AI
+                            </div>
+
+                        </div>
+
+
+                        <h3>
+                            Ready to analyze
+                        </h3>
+
+
+                        <p>
+                            Your prediction will
+                            appear here.
+                        </p>
+
+
+                    </div>
+
+                </div>
+
+
+            </section>
+
+        </main>
+
+
+
+        <!-- =========================
+             FOOTER
+        ========================== -->
+
+        <footer>
+
+            <div>
+
+                <strong>
+                    ReviewGuard AI
+                </strong>
+
+                <span>
+                    Fake Review Detection System
+                </span>
+
+            </div>
+
+
+            <span>
+                Machine Learning • NLP • FastAPI
+            </span>
+
+        </footer>
+
+
+    </div>
+
+
+
+    <script src="script.js"></script>
+
 </body>
+
 </html>
