@@ -1,92 +1,357 @@
-<<<<<<< HEAD
-# Fake Review Detection — Full Stack (FastAPI + Vanilla JS) — v2
+# 🕵️ Fake Review Detection System
 
-**No user-defined classes.** Backend in Python (FastAPI), frontend in HTML/CSS/JS.  
-**Now with:** `/metrics` endpoint + Docker + docker-compose.
+> A full-stack NLP application that analyzes product reviews and predicts whether a review is **genuine or fake** using machine learning.
 
-## Quickstart (Local, no Docker)
+<p align="center">
+  <img src="assets/fake-review-home.png" alt="Fake Review Detection System" width="850">
+</p>
+
+---
+
+## 📌 Overview
+
+The **Fake Review Detection System** is a machine learning-powered web application designed to identify potentially deceptive product reviews.
+
+The system processes review text using **TF-IDF feature extraction** and classifies it using a **Logistic Regression** model.
+
+A **FastAPI REST API** provides real-time predictions and model performance metrics, while a lightweight HTML, CSS, and JavaScript frontend provides an interactive interface for users.
+
+---
+
+## ✨ Key Features
+
+* 🔍 Detect fake and genuine product reviews
+* ⚡ Real-time review classification
+* 📊 Prediction confidence score
+* 📈 View model performance metrics
+* 🔄 Reload and retrain the model using another CSV dataset
+* 🌐 FastAPI REST API
+* 💻 Interactive web interface
+* 🐳 Docker and Docker Compose support
+* 🔗 CORS-enabled frontend/backend communication
+
+---
+
+## 📸 Project Preview
+
+### Review Detection
+
+<p align="center">
+  <img src="assets/prediction-result.png" alt="Fake Review Prediction" width="800">
+</p>
+
+Users can paste a product review into the interface and receive a prediction indicating whether the review is likely genuine or fake.
+
+### Model Metrics
+
+<p align="center">
+  <img src="assets/metrics.png" alt="Model Metrics" width="800">
+</p>
+
+The application also exposes model evaluation metrics including:
+
+* Accuracy
+* Precision
+* Recall
+* F1 Score
+
+---
+
+## 🧠 Machine Learning Pipeline
+
+```text
+Product Review
+      │
+      ▼
+Text Cleaning
+      │
+      ▼
+TF-IDF Vectorization
+Unigrams + Bigrams
+      │
+      ▼
+Logistic Regression
+      │
+      ▼
+Fake / Genuine Prediction
+      │
+      ▼
+Confidence Score
+```
+
+The text vectorizer uses:
+
+```text
+TF-IDF
+ngram_range = (1, 2)
+max_df = 0.95
+```
+
+The classifier is implemented using:
+
+```text
+Logistic Regression
+max_iter = 300
+random_state = 42
+```
+
+The dataset is divided using an **80/20 train-test split** with stratification.
+
+---
+
+## 🛠️ Tech Stack
+
+| Area             | Technologies            |
+| ---------------- | ----------------------- |
+| Machine Learning | Scikit-learn            |
+| NLP              | TF-IDF Vectorization    |
+| Model            | Logistic Regression     |
+| Backend          | Python, FastAPI         |
+| Data Processing  | Pandas, NumPy           |
+| Frontend         | HTML5, CSS3, JavaScript |
+| API              | REST                    |
+| Deployment       | Docker, Docker Compose  |
+| Web Server       | Nginx                   |
+
+---
+
+## 🏗️ System Architecture
+
+```text
+┌──────────────────────────┐
+│       User Browser       │
+│   HTML / CSS / JavaScript│
+└─────────────┬────────────┘
+              │
+              │ REST API
+              ▼
+┌──────────────────────────┐
+│        FastAPI API       │
+│                          │
+│  /predict                │
+│  /metrics                │
+│  /healthz                │
+│  /reload                 │
+└─────────────┬────────────┘
+              │
+              ▼
+┌──────────────────────────┐
+│     NLP / ML Pipeline    │
+│                          │
+│ Text Cleaning            │
+│       ↓                  │
+│ TF-IDF                   │
+│       ↓                  │
+│ Logistic Regression      │
+└──────────────────────────┘
+```
+
+---
+
+## 📂 Project Structure
+
+```text
+Fake-Review-Detection-System/
+│
+├── backend/
+│   ├── app.py
+│   ├── requirements.txt
+│   ├── Dockerfile
+│   │
+│   ├── data/
+│   │   └── fake_reviews_sample.csv
+│   │
+│   └── model/
+│       └── train.py
+│
+├── frontend/
+│   ├── index.html
+│   ├── style.css
+│   └── script.js
+│
+├── nginx/
+│   ├── default.conf
+│   └── Dockerfile
+│
+├── assets/
+│   ├── fake-review-home.png
+│   ├── prediction-result.png
+│   └── metrics.png
+│
+├── docker-compose.yml
+└── README.md
+```
+
+---
+
+## 🔌 API Endpoints
+
+### Health Check
+
+```http
+GET /healthz
+```
+
+Example response:
+
+```json
+{
+  "ok": true
+}
+```
+
+### Predict Review
+
+```http
+POST /predict
+```
+
+Request:
+
+```json
+{
+  "text": "This product is absolutely amazing!"
+}
+```
+
+Example response:
+
+```json
+{
+  "ok": true,
+  "result": {
+    "label": 1,
+    "confidence": 0.87
+  }
+}
+```
+
+### Model Metrics
+
+```http
+GET /metrics
+```
+
+Returns:
+
+```text
+Accuracy
+Precision
+Recall
+F1 Score
+```
+
+### Reload / Retrain Model
+
+```http
+POST /reload
+```
+
+The endpoint can load another CSV dataset and retrain the model.
+
+---
+
+## 🚀 Running the Project
 
 ### Backend
+
 ```bash
 cd backend
 python -m venv venv
-# Windows: venv\Scripts\activate
-# macOS/Linux: source venv/bin/activate
+```
+
+Windows:
+
+```bash
+venv\Scripts\activate
+```
+
+Install dependencies:
+
+```bash
 pip install -r requirements.txt
+```
+
+Start FastAPI:
+
+```bash
 uvicorn app:app --reload
 ```
 
+The backend will run at:
+
+```text
+http://127.0.0.1:8000
+```
+
+---
+
 ### Frontend
-Open `frontend/index.html` directly in the browser, or serve statically.  
-By default, it calls `http://127.0.0.1:8000`—change `API_BASE` in `frontend/script.js` if needed.
 
-## Endpoints
-- `GET /healthz` → `{"ok": true}`
-- `GET /metrics` → training metrics `{"f1", "precision", "recall", "accuracy"}`
-- `POST /predict` → `{"ok": true, "result": { "label": 0|1, "confidence": 0..1 } }`
-- `POST /reload` → retrain/load; body `{"csv_path": "/abs/path/to.csv"}`
+Open:
 
-## Use your Kaggle dataset
-```
-curl -X POST http://127.0.0.1:8000/reload   -H "Content-Type: application/json"   -d '{"csv_path":"C:/path/to/your.csv"}'
+```text
+frontend/index.html
 ```
 
-Your CSV should include a text column (e.g., `text`, `review`) and a binary label (`label`, `fake`, `is_fake`).
+in your browser.
 
-## Docker
+The frontend communicates with the FastAPI backend through JavaScript.
 
-Build and run both services (backend + nginx serving the frontend) with:
-```bash
-docker compose up --build
+---
+
+
+
+## 📊 Dataset Format
+
+The model accepts CSV datasets containing:
+
+### Review text
+
+Supported column names include:
+
+```text
+text
+review
+content
+Review
+Text
 ```
-- Frontend: http://127.0.0.1:5173
-- Backend:  http://127.0.0.1:8000
 
-### Re-train with your CSV inside Docker
-- Mount or copy your CSV to a reachable path in the backend container, or expose a host path via `volumes`.  
-- Then call `POST /reload` with that internal path.
+### Label
 
-## Notes
-- Metrics are stored at `backend/model/artifacts/metrics.json`.
-- All code uses **functions only**—no user-defined `class` anywhere.
-=======
-# Fake Review Detection System
+Supported label columns include:
 
-## Overview
-This project is a Natural Language Processing (NLP)-based system developed to detect fake and misleading product reviews. It analyzes textual data and applies machine learning techniques to classify reviews as genuine or fake.
+```text
+label
+target
+is_fake
+fake
+Label
+```
 
-## Features
-- Text preprocessing (cleaning, normalization, filtering)
-- Feature extraction using TF-IDF
-- Machine learning-based classification
-- Detection of fake and misleading reviews
-- Model evaluation and comparison
+Labels must be binary:
 
-## Technologies Used
-- Python
-- Pandas
-- NumPy
-- Scikit-learn
-- Natural Language Processing (NLP)
+```text
+0 / 1
+```
 
-## How It Works
-1. Load and clean the dataset  
-2. Normalize text (remove URLs, punctuation, etc.)  
-3. Convert text into numerical features using TF-IDF  
-4. Train machine learning models  
-5. Evaluate performance and select the best model  
-6. Classify reviews as fake or real  
+---
 
-## Model
-The system uses the following machine learning models:
-- Logistic Regression  
-- Support Vector Machine (SVM)  
+## 💡 What I Learned
 
-SVM achieved the best performance and was selected as the final model.
+Through this project, I gained hands-on experience with:
 
-## Results
-- Logistic Regression Accuracy: ~93.5%  
-- SVM Accuracy: ~94.4%  
-- SVM achieved the highest F1-score and overall performance  
+* Natural Language Processing
+* Text preprocessing
+* TF-IDF feature extraction
+* Machine learning classification
+* Model evaluation
+* REST API development with FastAPI
+* Frontend-to-backend API integration
+* Docker-based application deployment
+* Structuring a full-stack machine learning application
 
->>>>>>> origin/main
+---
+
+
