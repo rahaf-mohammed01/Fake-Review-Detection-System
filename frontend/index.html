@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fake Review Detector</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>Fake Review Detector</h1>
+      <p>Paste a product review, then click Predict. You can also view backend metrics.</p>
+    </header>
+
+    <main>
+      <textarea id="review" placeholder="Paste the review text here..."></textarea>
+      <div class="actions">
+        <button id="predictBtn">Predict</button>
+        <button id="metricsBtn">Show Metrics</button>
+        <span id="status"></span>
+      </div>
+      <div id="result" class="result"></div>
+      <h3>Model Metrics</h3>
+      <div id="metrics" class="result"></div>
+    </main>
+
+    <footer>
+      <small>Backend: FastAPI · Frontend: Vanilla JS · No custom classes · Docker-ready</small>
+    </footer>
+  </div>
+
+  <script src="./script.js"></script>
+</body>
+</html>
